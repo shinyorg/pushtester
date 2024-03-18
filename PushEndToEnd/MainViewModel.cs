@@ -9,9 +9,14 @@ public class MainViewModel : FuncViewModel
     public MainViewModel(
         BaseServices services,
         IPushSender pushSender,
-        IPushManager pushManager
+        IPushManager pushManager,
+        IConfiguration configuration
     ) : base(services)
     {
+        this.PushPlatform = configuration["PushProvider"]!.Contains("azure")
+            ? "Azure Notification Hubs"
+            : "Firebase Message";
+           
         this.WhenAnyValue(x => x.RegistrationToken)
             .Subscribe(x =>
             {
@@ -67,11 +72,7 @@ public class MainViewModel : FuncViewModel
     }
 
 
-#if FIREBASE
-    public string PushPlatform => "Firebase";
-#elif AZURE
-    public string PushPlatform => "Azure Notification Hubs";
-#endif
+    public string PushPlatform { get; }
 
     public ICommand Register { get; }
     public ICommand Send { get; }
