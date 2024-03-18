@@ -1,5 +1,4 @@
-﻿#if FIREBASE
-using FirebaseAdmin;
+﻿using FirebaseAdmin;
 using FirebaseAdmin.Messaging;
 using Google.Apis.Auth.OAuth2;
 using Notification = FirebaseAdmin.Messaging.Notification;
@@ -27,15 +26,29 @@ public class FirebasePushSender : IPushSender
     {
         var message = new Message
         {
-            //Topic = token,
-            Notification = new Notification
+            Data = new Dictionary<string, string>
+            {
+                { "TestKey", "TestData" }
+            },
+            Token = token,
+#if IOS
+            Apns = new ApnsConfig
+            {
+                Aps = new FirebaseAdmin.Messaging.Aps
+                {
+                    ContentAvailable = true
+                }
+            }
+#endif
+        };
+        if (!silent)
+        {
+            message.Notification = new Notification
             {
                 Title = "Test Notification",
                 Body = "This is a test notification"
-            },
-            Token = token
-        };
+            };
+        }
         var response = await this.messaging.SendAsync(message);
     }
 }
-#endif

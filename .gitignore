@@ -404,3 +404,5 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+PushEndToEnd/appsettings.moultrie.json
+PushEndToEnd/appsettings.mine.json

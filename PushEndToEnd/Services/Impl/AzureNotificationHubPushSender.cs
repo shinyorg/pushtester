@@ -1,5 +1,4 @@
-﻿#if AZURE
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Azure.NotificationHubs;
 
@@ -38,14 +37,10 @@ public class AzureNotificationHubPushSender : IPushSender
         //var outcome = await this.client.SendFcmV1NativeNotificationAsync(json, new[] { "Testing" });
 #else
         var push = new ApplePush { DataTest = "Testing data" };
-        if (silent)
-        {
-            push.Aps.ContentAvailable = 1;
-        }
-        else
-        {
+        push.Aps.ContentAvailable = 1;
+        if (!silent)
             push.Aps.Alert = "Test Message";
-        }
+        
         var json = JsonSerializer.Serialize(push, this.serializerOptions);
         var outcome = await this.client.SendAppleNativeNotificationAsync(json, new[] { token });
         //var outcome = await this.client.SendAppleNativeNotificationAsync(json, new[] { "Testing" });
@@ -107,4 +102,3 @@ public class Aps
     [JsonPropertyName("content-available")]
     public int? ContentAvailable { get; set; }
 }
-#endif

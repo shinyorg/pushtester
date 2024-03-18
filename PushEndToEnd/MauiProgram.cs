@@ -54,11 +54,32 @@ public static class MauiProgram
         return builder;
     }
 
-#if AZURE
+
     static MauiAppBuilder RegisterPush(this MauiAppBuilder builder)
     {
+        var provider = builder.Configuration["PushProvider"]?.ToLower();
+
+        switch (provider)
+        {
+            case "azurenotificationhubs":
+                RegisterAzure(builder);
+                break;
+
+            case "firebase":
+                RegisterFirebase(builder);
+                break;
+
+            default:
+                throw new InvalidOperationException("Invalid Push Provider - " + provider);
+        }
+        return builder;
+    }
+
+
+    static void RegisterAzure(MauiAppBuilder builder)
+    {
         builder.Services.AddSingleton<IPushSender, AzureNotificationHubPushSender>();
-        
+
         builder.Services.AddPushAzureNotificationHubs<MyPushDelegate>(
             builder.Configuration["AzureNotificationHubs:ListenerConnectionString"]!,
             builder.Configuration["AzureNotificationHubs:HubName"]!
@@ -72,18 +93,15 @@ public static class MauiProgram
             )
 #endif
         );
-        return builder;
     }
 
-#elif FIREBASE
 
-    static MauiAppBuilder RegisterPush(this MauiAppBuilder builder)
+    static void RegisterFirebase(MauiAppBuilder builder)
     {
         builder.Services.AddSingleton<IPushSender, FirebasePushSender>();
 
-        // TODO: watch android/ios specific var below
-        builder.Services.AddPushFirebaseMessage<MyPushDelegate>(
-            new FirebaseConfig(
+        builder.Services.AddPushFirebaseMessaging<MyPushDelegate>(
+            new FirebaseConfiguration(
                 false,
 #if IOS
                 builder.Configuration["Firebase:AppleAppId"],
@@ -95,8 +113,5 @@ public static class MauiProgram
                 builder.Configuration["Firebase:ApiKey"]
             )
         );
-        return builder;
     }
-
-#endif
 }
