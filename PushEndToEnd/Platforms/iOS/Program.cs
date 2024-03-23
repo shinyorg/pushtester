@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace PushEndToEnd;
+namespace PushTesting;
 
 
 public class Program

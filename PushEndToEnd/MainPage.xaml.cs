@@ -1,4 +1,4 @@
-﻿namespace PushEndToEnd;
+﻿namespace PushTesting;
 
 
 public partial class MainPage : ContentPage

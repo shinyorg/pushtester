@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.Azure.NotificationHubs;
 
-namespace PushEndToEnd.Services.Impl;
+namespace PushTesting.Services.Impl;
 
 
 public class AzureNotificationHubPushSender : IPushSender

@@ -3,7 +3,7 @@ using FirebaseAdmin.Messaging;
 using Google.Apis.Auth.OAuth2;
 using Notification = FirebaseAdmin.Messaging.Notification;
 
-namespace PushEndToEnd.Services.Impl;
+namespace PushTesting.Services.Impl;
 
 
 public class FirebasePushSender : IPushSender

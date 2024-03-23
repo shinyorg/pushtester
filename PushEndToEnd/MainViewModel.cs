@@ -1,7 +1,7 @@
-﻿using PushEndToEnd.Services;
+﻿using PushTesting.Services;
 using Shiny.Push;
 
-namespace PushEndToEnd;
+namespace PushTesting;
 
 
 public class MainViewModel : FuncViewModel

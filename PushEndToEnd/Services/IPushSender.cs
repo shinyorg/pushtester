@@ -1,4 +1,4 @@
-﻿namespace PushEndToEnd.Services;
+﻿namespace PushTesting.Services;
 
 public interface IPushSender
 {

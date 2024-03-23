@@ -1,16 +1,14 @@
 ﻿using Foundation;
 using UIKit;
 
-namespace PushEndToEnd;
+namespace PushTesting;
 
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
 {
     protected override MauiApp CreateMauiApp() 
-    {
-        return MauiProgram.CreateMauiApp();
-    }
+        => MauiProgram.CreateMauiApp();
 
     [Export("application:didRegisterForRemoteNotificationsWithDeviceToken:")]
     public void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)

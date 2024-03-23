@@ -1,9 +1,9 @@
-﻿using PushEndToEnd.Delegates;
-using PushEndToEnd.Services;
-using PushEndToEnd.Services.Impl;
+﻿using PushTesting.Delegates;
+using PushTesting.Services;
+using PushTesting.Services.Impl;
 using Shiny.Push;
 
-namespace PushEndToEnd;
+namespace PushTesting;
 
 
 public static class MauiProgram
@@ -14,14 +14,25 @@ public static class MauiProgram
         .UseMauiCommunityToolkit()
         .UseShinyFramework(
             new DryIocContainerExtension(),
-            prism => prism.OnAppStart("NavigationPage/MainPage"),
-            new (
-#if DEBUG
-                ErrorAlertType.FullError
-#else
-                ErrorAlertType.NoLocalize
-#endif
-            )
+            prism => prism.CreateWindow((_, nav) => nav
+                .CreateBuilder()
+                .AddNavigationPage()
+                .AddSegment(nameof(MainPage))
+                //.AddSegment(nameof(EventsPage))
+
+                //.AddTabbedSegment(tabs => tabs
+                //    .CreateTab(page => page
+                //        .AddNavigationPage()
+                //        .AddSegment(nameof(MainPage))
+                //    )
+                //    .CreateTab(page => page
+                //        .AddNavigationPage()
+                //        .AddSegment(nameof(EventsPage))
+                //    )
+                //)
+                .NavigateAsync()
+            ),
+            new (ErrorAlertType.FullError)
         )
         .ConfigureFonts(fonts =>
         {
@@ -36,21 +47,23 @@ public static class MauiProgram
 
     static MauiAppBuilder RegisterInfrastructure(this MauiAppBuilder builder)
     {
+        
         builder.Configuration.AddJsonPlatformBundle();
 #if DEBUG
         builder.Logging.SetMinimumLevel(LogLevel.Trace);
         builder.Logging.AddDebug();
 #endif
         builder.Services.AddDataAnnotationValidation();
+        builder.Services.AddSingleton<AppSqliteConnection>();
+
         return builder;
     }
 
 
     static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
     {
-        var s = builder.Services;
-
-        s.RegisterForNavigation<MainPage, MainViewModel>();
+        builder.Services.RegisterForNavigation<MainPage, MainViewModel>();
+        builder.Services.RegisterForNavigation<EventsPage, EventsViewModel>();
         return builder;
     }
 

@@ -1,12 +1,11 @@
 ﻿using Android.App;
-using Android.OS;
 using Android.Content.PM;
-using Microsoft.Maui.ApplicationModel;
 
-namespace PushEndToEnd;
+namespace PushTesting;
 
 
 [Activity(
+    LaunchMode = LaunchMode.SingleTop,
     Theme = "@style/Maui.SplashTheme", 
     MainLauncher = true, 
     ConfigurationChanges = 

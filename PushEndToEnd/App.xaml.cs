@@ -1,4 +1,4 @@
-﻿namespace PushEndToEnd;
+﻿namespace PushTesting;
 
 public partial class App : Application
 {
@@ -7,4 +7,3 @@ public partial class App : Application
 		this.InitializeComponent();
 	}
 }
-

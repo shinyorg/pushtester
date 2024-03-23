@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace PushEndToEnd;
+namespace PushTesting;
 
 
 [Application]
