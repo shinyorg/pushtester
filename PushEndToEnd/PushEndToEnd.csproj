@@ -2,6 +2,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>$(TargetFrameworks);net8.0-ios</TargetFrameworks>
 		<TargetFrameworks>$(TargetFrameworks);net8.0-android</TargetFrameworks>
+		<ShinyDebug>false</ShinyDebug>
 
 		<MauiVersion>8.0.14</MauiVersion>
 		<OutputType>Exe</OutputType>
@@ -13,7 +14,6 @@
 		<UseMaui>true</UseMaui>
 
 		<ApplicationTitle>Push Testing</ApplicationTitle>
-		<!--<ApplicationId>com.rd.mmMaui</ApplicationId>-->
 		<ApplicationId>org.shiny.pushsample</ApplicationId>
 		<ApplicationIdGuid>98E9BAD9-90C2-4A3A-BE58-5029A6DD6217</ApplicationIdGuid>
 
@@ -84,24 +84,15 @@
 		<PackageReference Include="Shiny.Extensions.Configuration" Version="$(ShinyVersion)" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(ShinyDebug)' != 'true'">
 		<PackageReference Include="Shiny.Push.AzureNotificationHubs" Version="$(ShinyVersion)" />
 		<PackageReference Include="Shiny.Push.FirebaseMessaging" Version="$(ShinyVersion)" />
     </ItemGroup>
 
-	<!--
-	<ItemGroup>
-		<PackageReference Include="Shiny.Push.AzureNotificationHubs" Version="$(ShinyVersion)" />
-		<PackageReference Include="Shiny.Push.FirebaseMessaging" Version="$(ShinyVersion)" />
-    </ItemGroup>
-	-->
-
-	<!--
-	<ItemGroup>
+	<ItemGroup Condition="'$(ShinyDebug)' == 'true'">
 		<ProjectReference Include="..\..\shiny\src\Shiny.Core\Shiny.Core.csproj" />
 		<ProjectReference Include="..\..\shiny\src\Shiny.Push\Shiny.Push.csproj" />
 		<ProjectReference Include="..\..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj" />
 		<ProjectReference Include="..\..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj" />
 	</ItemGroup>
-	-->
 </Project>
