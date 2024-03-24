@@ -1,0 +1,54 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushEndToEnd", "PushEndToEnd\PushEndToEnd.csproj", "{DBC33EB5-7F7B-4F17-AED2-192963991767}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DABAB79F-FE7C-4803-B699-D99B11358C1F}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Core", "..\shiny\src\Shiny.Core\Shiny.Core.csproj", "{7089A0E9-19C9-4F18-BC55-27E3ECA592CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Push", "..\shiny\src\Shiny.Push\Shiny.Push.csproj", "{273F18D2-C271-436A-B398-406863E29AE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Push.AzureNotificationHubs", "..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj", "{8E8632A7-38B2-4713-912E-14A59212221A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Push.FirebaseMessaging", "..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj", "{6DE63C5C-D170-4F10-A335-50ADCBDD8571}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBC33EB5-7F7B-4F17-AED2-192963991767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC33EB5-7F7B-4F17-AED2-192963991767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC33EB5-7F7B-4F17-AED2-192963991767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC33EB5-7F7B-4F17-AED2-192963991767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7089A0E9-19C9-4F18-BC55-27E3ECA592CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7089A0E9-19C9-4F18-BC55-27E3ECA592CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7089A0E9-19C9-4F18-BC55-27E3ECA592CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7089A0E9-19C9-4F18-BC55-27E3ECA592CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{273F18D2-C271-436A-B398-406863E29AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{273F18D2-C271-436A-B398-406863E29AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{273F18D2-C271-436A-B398-406863E29AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{273F18D2-C271-436A-B398-406863E29AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E8632A7-38B2-4713-912E-14A59212221A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E8632A7-38B2-4713-912E-14A59212221A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E8632A7-38B2-4713-912E-14A59212221A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E8632A7-38B2-4713-912E-14A59212221A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE63C5C-D170-4F10-A335-50ADCBDD8571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE63C5C-D170-4F10-A335-50ADCBDD8571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE63C5C-D170-4F10-A335-50ADCBDD8571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE63C5C-D170-4F10-A335-50ADCBDD8571}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D3CF40A-234B-4F4F-B520-723A42CE8DE0}
+	EndGlobalSection
+EndGlobal
