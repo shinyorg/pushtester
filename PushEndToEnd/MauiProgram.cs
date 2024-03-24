@@ -16,23 +16,19 @@ public static class MauiProgram
             new DryIocContainerExtension(),
             prism => prism.CreateWindow((_, nav) => nav
                 .CreateBuilder()
-                .AddNavigationPage()
-                .AddSegment(nameof(MainPage))
-                //.AddSegment(nameof(EventsPage))
-
-                //.AddTabbedSegment(tabs => tabs
-                //    .CreateTab(page => page
-                //        .AddNavigationPage()
-                //        .AddSegment(nameof(MainPage))
-                //    )
-                //    .CreateTab(page => page
-                //        .AddNavigationPage()
-                //        .AddSegment(nameof(EventsPage))
-                //    )
-                //)
+                .AddTabbedSegment(tabs => tabs
+                    .CreateTab(page => page
+                        .AddNavigationPage()
+                        .AddSegment(nameof(MainPage))
+                    )
+                    .CreateTab(page => page
+                        .AddNavigationPage()
+                        .AddSegment(nameof(EventsPage))
+                    )
+                )
                 .NavigateAsync()
             ),
-            new (ErrorAlertType.FullError)
+            new(ErrorAlertType.FullError)
         )
         .ConfigureFonts(fonts =>
         {

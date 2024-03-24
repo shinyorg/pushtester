@@ -30,4 +30,3 @@ namespace PushTesting;
 public class MainActivity : MauiAppCompatActivity
 {
 }
-

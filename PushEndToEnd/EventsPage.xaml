@@ -11,50 +11,52 @@
                      Command="{Binding Clear}" />
     </ContentPage.ToolbarItems>
 
-    <RefreshView IsRefreshing="{Binding IsBusy}"
-                 Command="{Binding Load}">
-        <CollectionView ItemsSource="{Binding Events}">
-            <CollectionView.EmptyView>
-                <Label Text="No Events Logged"
-                       FontSize="Large"
-                       HorizontalOptions="FillAndExpand"
-                       HorizontalTextAlignment="Center"
-                       VerticalOptions="FillAndExpand"
-                       VerticalTextAlignment="Center" />
-            </CollectionView.EmptyView>
+    <ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsBusy}"
+                     Command="{Binding Load}">
+            <CollectionView ItemsSource="{Binding Events}">
+                <CollectionView.EmptyView>
+                    <Label Text="No Events Logged"
+                           FontSize="Large"
+                           HorizontalOptions="FillAndExpand"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="FillAndExpand"
+                           VerticalTextAlignment="Center" />
+                </CollectionView.EmptyView>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="services:AppEvent">
-                    <Grid ColumnDefinitions="4*, 1*"
-                          RowDefinitions="Auto, Auto, Auto">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="services:AppEvent">
+                        <Grid ColumnDefinitions="4*, 1*"
+                              RowDefinitions="Auto, Auto, Auto">
 
-                        <Label Text="{Binding EventName}"
-                               FontSize="Large"
-                               FontAttributes="Bold"
-                               Grid.Row="0"
-                               Grid.Column="0" />
+                            <Label Text="{Binding EventName}"
+                                   FontSize="Large"
+                                   FontAttributes="Bold"
+                                   Grid.Row="0"
+                                   Grid.Column="0" />
 
-                        <Label Text="{Binding DateCreated}"
-                               FontSize="Small"
-                               FontAttributes="Italic"
-                               Grid.Row="0"
-                               Grid.Column="1" />
+                            <Label Text="{Binding DateCreated}"
+                                   FontSize="Small"
+                                   FontAttributes="Italic"
+                                   Grid.Row="0"
+                                   Grid.Column="1" />
 
-                        <Label Text="{Binding Description}"
-                               FontSize="Medium"
-                               FontAttributes="Italic"
-                               Grid.Row="1"
-                               Grid.ColumnSpan="2" />
+                            <Label Text="{Binding Description}"
+                                   FontSize="Medium"
+                                   FontAttributes="Italic"
+                                   Grid.Row="1"
+                                   Grid.ColumnSpan="2" />
 
-                        <BoxView BackgroundColor="LightGray"
-                                 HeightRequest="1"
-                                 HorizontalOptions="FillAndExpand"
-                                 VerticalOptions="Center"
-                                 Grid.ColumnSpan="2"
-                                 Grid.Row="2" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
+                            <BoxView BackgroundColor="LightGray"
+                                     HeightRequest="1"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="Center"
+                                     Grid.ColumnSpan="2"
+                                     Grid.Row="2" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </ContentPage.Content>
 </ContentPage>

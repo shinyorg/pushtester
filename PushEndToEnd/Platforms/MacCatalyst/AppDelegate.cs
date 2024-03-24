@@ -20,6 +20,4 @@ public class AppDelegate : MauiUIApplicationDelegate
     [Export("application:didReceiveRemoteNotification:fetchCompletionHandler:")]
     public void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         => global::Shiny.Hosting.Host.Lifecycle.OnDidReceiveRemoteNotification(userInfo, completionHandler);
-
 }
-
