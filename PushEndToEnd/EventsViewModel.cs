@@ -27,7 +27,10 @@ public class EventsViewModel : FuncViewModel
 		{
 			var confirm = await this.Dialogs.Confirm("Clear All Events?");
 			if (confirm)
+			{
+				await conn.DeleteAllAsync<AppEvent>();
 				this.Load.Execute(null);
+			}
 		});
 		this.Appearing = () => this.Load.Execute(null);
 	}
