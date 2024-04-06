@@ -18,13 +18,10 @@ namespace PushTesting;
 )]
 [IntentFilter(
     new[] { 
-        Platform.Intent.ActionAppAction,
-        global::Android.Content.Intent.ActionView
-        , ShinyPushIntents.NotificationClickAction 
+        ShinyPushIntents.NotificationClickAction 
     },    
     Categories = new[] { 
-        global::Android.Content.Intent.CategoryDefault,
-        global::Android.Content.Intent.CategoryBrowsable
+        global::Android.Content.Intent.CategoryDefault
     }
 )]
 public class MainActivity : MauiAppCompatActivity

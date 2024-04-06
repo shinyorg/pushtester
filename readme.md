@@ -12,9 +12,8 @@ to ensure you have setup everything properly from APP to Provider.
 1. Open PushEndToEnd.csproj and set <ApplicationId>.  This must match your iOS provisioning or Android identifier that you are pushing from
 2. Open appsettings.json and set PushProvider to azurenotificationhubs or firebase
 3. Open appsettings.json and set appropriate variables
-    * All firebase variables BUT Firebase:AccessToken required for Android on azure & firebase setups
-    * Firebase:AccessToken is required only for sending to Firebase
-    * All AzureNotificationHubs variables required for Azure tests
+4. All AzureNotificationHubs variables required for Azure tests
+5. Ensure to set Firebase/Sender variables from service account key in Firebase
 
 ## NOTES
 * If you're on iOS & debugging, you will need to be pointed at a sandbox setup environment
@@ -23,3 +22,7 @@ to ensure you have setup everything properly from APP to Provider.
 * Push only works on Android simulators if you're signed into Google Play
 * You can compile for MacCatalyst for Azure Notification Hubs, but NOT firebase (edit csproj to set this up)
 * iOS: if you're server is pointed at development, you can have to compile in debug.  If you're server is pointed at development, you must compile with an adhoc/appstore profile
+
+## FAQ
+> Q. Why can I note test pure Apple Push Notifications APNS with this
+> A. There is some special encryption requirements to pushing things to Apple, that I haven't found work on iOS

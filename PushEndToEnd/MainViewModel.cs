@@ -47,7 +47,6 @@ public class MainViewModel : FuncViewModel
                 else
                 {
                     this.RegistrationToken = result.RegistrationToken;
-                    await pushManager.TrySetTags(result.RegistrationToken!, "Testing");
                 }  
             }
             else

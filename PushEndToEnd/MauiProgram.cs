@@ -1,4 +1,7 @@
-﻿using PushTesting.Delegates;
+﻿#if ANDROID
+using Android.App;
+#endif
+using PushTesting.Delegates;
 using PushTesting.Services;
 using PushTesting.Services.Impl;
 using Shiny.Push;
@@ -8,48 +11,46 @@ namespace PushTesting;
 
 public static class MauiProgram
 {
-    public static MauiApp CreateMauiApp() => MauiApp
-        .CreateBuilder()
-        .UseMauiApp<App>()
-        .UseMauiCommunityToolkit()
-        .UseShinyFramework(
-            new DryIocContainerExtension(),
-            prism => prism.CreateWindow((_, nav) => nav
-                .CreateBuilder()
-                .AddTabbedSegment(tabs => tabs
-                    .CreateTab(page => page
-                        .AddNavigationPage()
-                        .AddSegment(nameof(MainPage))
+    public static MauiApp CreateMauiApp()
+        => MauiApp
+            .CreateBuilder()
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
+            .UseShinyFramework(
+                new DryIocContainerExtension(),
+                prism => prism.CreateWindow((_, nav) => nav
+                    .CreateBuilder()
+                    .AddTabbedSegment(tabs => tabs
+                        .CreateTab(page => page
+                            .AddNavigationPage()
+                            .AddSegment(nameof(MainPage))
+                        )
+                        .CreateTab(page => page
+                            .AddNavigationPage()
+                            .AddSegment(nameof(EventsPage))
+                        )
                     )
-                    .CreateTab(page => page
-                        .AddNavigationPage()
-                        .AddSegment(nameof(EventsPage))
-                    )
-                )
-                .NavigateAsync()
-            ),
-            new(ErrorAlertType.FullError)
-        )
-        .ConfigureFonts(fonts =>
-        {
-            fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-            fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-        })
-        .RegisterInfrastructure()
-        .RegisterViews()
-        .RegisterPush()
-        .Build();
+                ),
+                new(ErrorAlertType.FullError)
+            )
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            })
+            .RegisterInfrastructure()
+            .RegisterViews()
+            .RegisterPush()
+            .Build();
 
 
     static MauiAppBuilder RegisterInfrastructure(this MauiAppBuilder builder)
     {
-        
         builder.Configuration.AddJsonPlatformBundle();
 #if DEBUG
         builder.Logging.SetMinimumLevel(LogLevel.Trace);
         builder.Logging.AddDebug();
 #endif
-        builder.Services.AddDataAnnotationValidation();
         builder.Services.AddSingleton<AppSqliteConnection>();
 
         return builder;
@@ -98,7 +99,8 @@ public static class MauiProgram
                 builder.Configuration["Firebase:AndroidAppId"],
                 builder.Configuration["Firebase:ProjectNumber"],
                 builder.Configuration["Firebase:ProjectId"],
-                builder.Configuration["Firebase:ApiKey"]
+                builder.Configuration["Firebase:ApiKey"],
+                DefaultChannel
             )
 #endif
         );
@@ -120,7 +122,21 @@ public static class MauiProgram
                 builder.Configuration["Firebase:ProjectNumber"],
                 builder.Configuration["Firebase:ProjectId"],
                 builder.Configuration["Firebase:ApiKey"]
+#if ANDROID
+                , DefaultChannel
+#endif
             )
         );
     }
+
+#if ANDROID
+    static NotificationChannel DefaultChannel => new NotificationChannel(
+        "default_channel",
+        "Default Channel",
+        NotificationImportance.Default
+    )
+    {
+        LockscreenVisibility = NotificationVisibility.Public
+    };
+#endif
 }

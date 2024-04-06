@@ -1,4 +1,6 @@
-﻿using FirebaseAdmin;
+﻿using System.Text;
+using System.Text.Json;
+using FirebaseAdmin;
 using FirebaseAdmin.Messaging;
 using Google.Apis.Auth.OAuth2;
 using Notification = FirebaseAdmin.Messaging.Notification;
@@ -14,11 +16,38 @@ public class FirebasePushSender : IPushSender
 
 	public FirebasePushSender(IConfiguration configuration)
 	{
-        this.app = FirebaseApp.Create(new AppOptions
+        try
         {
-            Credential = GoogleCredential.FromAccessToken(configuration["Firebase:AccessToken"])
-        });
-        this.messaging = FirebaseMessaging.GetMessaging(this.app);
+            var json = JsonSerializer.Serialize(new
+            {
+                type = "service_account",
+                project_id = configuration["Firebase:ProjectId"],
+                private_key_id = configuration["Firebase:Sender:private_key_id"],
+                private_key = configuration["Firebase:Sender:private_key"],
+                client_email = configuration["Firebase:Sender:client_email"],
+                client_id = configuration["Firebase:Sender:client_id"],
+                client_x509_cert_url = configuration["Firebase:Sender:client_x509_cert_url"],
+                auth_uri = "https://accounts.google.com/o/oauth2/auth",
+                token_uri = "https://oauth2.googleapis.com/token",
+                auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs",
+                universe_domain = "googleapis.com"
+            });
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+
+            var cred = GoogleCredential.FromServiceAccountCredential(
+                ServiceAccountCredential.FromServiceAccountData(stream)
+            );
+
+            this.app = FirebaseApp.Create(new AppOptions
+            {
+                Credential = cred
+            });
+            this.messaging = FirebaseMessaging.GetMessaging(this.app);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 
 
@@ -34,7 +63,7 @@ public class FirebasePushSender : IPushSender
 #if IOS
             Apns = new ApnsConfig
             {
-                Aps = new FirebaseAdmin.Messaging.Aps
+                Aps = new Aps
                 {
                     ContentAvailable = true
                 }
@@ -48,6 +77,18 @@ public class FirebasePushSender : IPushSender
                 Title = "Test Notification",
                 Body = "This is a test notification"
             };
+#if ANDROID
+            message.Android = new AndroidConfig
+            {
+                Notification = new AndroidNotification
+                {
+                    Title = "Test Notification",
+                    Body = "This is a test notification",
+                    ClickAction = ShinyPushIntents.NotificationClickAction
+                    //Icon = "notification"
+                }
+            };
+#endif
         }
         var response = await this.messaging.SendAsync(message);
     }
