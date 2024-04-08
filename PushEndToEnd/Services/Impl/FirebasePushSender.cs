@@ -33,7 +33,6 @@ public class FirebasePushSender : IPushSender
                 universe_domain = "googleapis.com"
             });
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
-
             var cred = GoogleCredential.FromServiceAccountCredential(
                 ServiceAccountCredential.FromServiceAccountData(stream)
             );
@@ -80,6 +79,7 @@ public class FirebasePushSender : IPushSender
 #if ANDROID
             message.Android = new AndroidConfig
             {
+                
                 Notification = new AndroidNotification
                 {
                     Title = "Test Notification",

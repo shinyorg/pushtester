@@ -15,6 +15,10 @@ public class MyPushDelegate(AppSqliteConnection conn, IDialogs dialogs) : PushDe
 
     public override async Task OnReceived(PushNotification notification)
     {
+#if ANDROID
+        // TODO: if in foreground
+        ((AndroidPushNotification)notification).SendDefault(100);
+#endif
         await this.Store(notification.Data.Select(x => (x.Key, x.Value)).ToArray());
         await this.Message("Push Notification Received");
     }
