@@ -10,14 +10,21 @@ public interface IApiClient
 
     [Delete("/push/{platform}/{pushToken}")]
     Task UnRegister(string platform, string pushToken);
-
-
-    [Post("")]
-    Task Send();
+    
+    [Post("/push/send")]
+    Task Send([Body] PushSendRequest args);
 }
 
 public record PushRegister(
     string Platform,
     string DeviceToken,
     string[]? Tags = null
+);
+
+public record PushSendRequest(
+    string NotificationTitle,
+    string NotificationMessage,
+    bool IsSilent,
+    string PushToken,
+    Dictionary<string, string> Data
 );

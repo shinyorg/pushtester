@@ -15,13 +15,18 @@ public static class Endpoints
                 [FromServices] IPushManager push
             ) =>
             {
+                // TODO: silent
                 await push.Send(
                     new Notification
                     {
                         Title = request.NotificationTitle,
-                        Message = request.NotificationMessage
+                        Message = request.NotificationMessage,
+                        Data = request.Data
                     },
-                    request.Filter
+                    new Filter
+                    {
+                        DeviceToken = request.PushToken
+                    }
                 );
             }
         );
@@ -44,5 +49,7 @@ public static class Endpoints
 public record PushSendRequest(
     string NotificationTitle,
     string NotificationMessage,
-    Filter? Filter = null
+    bool IsSilent,
+    string PushToken,
+    Dictionary<string, string> Data
 );

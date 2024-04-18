@@ -13,9 +13,12 @@ public class MainViewModel : FuncViewModel
         IConfiguration configuration
     ) : base(services)
     {
-        this.PushPlatform = configuration["PushProvider"]!.Contains("azure")
-            ? "Azure Notification Hubs"
-            : "Firebase Message";
+        this.PushPlatform = configuration["PushProvider"] switch
+        {
+            "azurenotificationhubs" => "Azure Notification Hubs",
+            "firebase" => "Firebase Messaging",
+            "native" => "Native"
+        };
            
         this.WhenAnyValue(x => x.RegistrationToken)
             .Subscribe(x =>
