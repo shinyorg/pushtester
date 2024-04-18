@@ -24,5 +24,5 @@ to ensure you have setup everything properly from APP to Provider.
 * iOS: if you're server is pointed at development, you can have to compile in debug.  If you're server is pointed at development, you must compile with an adhoc/appstore profile
 
 ## FAQ
-> Q. Why can I note test pure Apple Push Notifications APNS with this
+> Q. Why can I not test pure Apple Push Notifications APNS with this?
 > A. There is some special encryption requirements to pushing things to Apple, that I haven't found work on iOS
