@@ -1,0 +1,8 @@
+﻿<Project>
+    <PropertyGroup>
+        <ShinyDebug>false</ShinyDebug>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>preview</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+</Project>

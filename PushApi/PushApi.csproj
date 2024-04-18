@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+<!--        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />-->
+<!--        <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />-->
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(ShinyDebug)' == 'false'">
+        <PackageReference Include="Shiny.Extensions.Push" Version="2.0.0-preview-0014" />    
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(ShinyDebug)' == 'true'">
+        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Abstractions\Shiny.Extensions.Push.Abstractions.csproj" />
+        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Apple\Shiny.Extensions.Push.Apple.csproj" />
+        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Endpoints\Shiny.Extensions.Push.Endpoints.csproj" />
+        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.GoogleFirebase\Shiny.Extensions.Push.GoogleFirebase.csproj" />
+        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push\Shiny.Extensions.Push.csproj" />
+        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Abstractions\Shiny.Extensions.Push.Abstractions.csproj" />
+    </ItemGroup>
+
+</Project>

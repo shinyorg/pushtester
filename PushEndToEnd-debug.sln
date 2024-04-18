@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DABAB79F-FE7C-4803-B699-D99B11358C1F}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
+		Directory.build.props = Directory.build.props
+		Directory.build.targets = Directory.build.targets
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Core", "..\shiny\src\Shiny.Core\Shiny.Core.csproj", "{7089A0E9-19C9-4F18-BC55-27E3ECA592CB}"
@@ -17,6 +19,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Push.AzureNotificationHubs", "..\shiny\src\Shiny.Push.AzureNotificationHubs\Shiny.Push.AzureNotificationHubs.csproj", "{8E8632A7-38B2-4713-912E-14A59212221A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Push.FirebaseMessaging", "..\shiny\src\Shiny.Push.FirebaseMessaging\Shiny.Push.FirebaseMessaging.csproj", "{6DE63C5C-D170-4F10-A335-50ADCBDD8571}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushApi", "PushApi\PushApi.csproj", "{226DCA7E-F5CF-475F-B2BA-B2952F59E7E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Extensions.Push.Abstractions", "..\apiservices\src\Shiny.Extensions.Push.Abstractions\Shiny.Extensions.Push.Abstractions.csproj", "{07D06440-3227-45E7-8675-78C2AFF28681}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Extensions.Push", "..\apiservices\src\Shiny.Extensions.Push\Shiny.Extensions.Push.csproj", "{62D88CAC-B3E4-4314-BB8C-BBA3EEC8B296}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Extensions.Push.Apple", "..\apiservices\src\Shiny.Extensions.Push.Apple\Shiny.Extensions.Push.Apple.csproj", "{1ECBC9C9-A02B-464D-9F4A-7A65B22FE8DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Extensions.Push.GoogleFirebase", "..\apiservices\src\Shiny.Extensions.Push.GoogleFirebase\Shiny.Extensions.Push.GoogleFirebase.csproj", "{3C3C7DB5-C352-4095-AF56-83F6AAB0DCF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{93C12687-E976-4557-9E43-5A5695E37802}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny.Extensions.Push.Endpoints", "..\apiservices\src\Shiny.Extensions.Push.Endpoints\Shiny.Extensions.Push.Endpoints.csproj", "{D9B2218B-12E1-4503-9863-9A3872FF1866}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,11 +60,43 @@ Global
 		{6DE63C5C-D170-4F10-A335-50ADCBDD8571}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DE63C5C-D170-4F10-A335-50ADCBDD8571}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DE63C5C-D170-4F10-A335-50ADCBDD8571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{226DCA7E-F5CF-475F-B2BA-B2952F59E7E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{226DCA7E-F5CF-475F-B2BA-B2952F59E7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{226DCA7E-F5CF-475F-B2BA-B2952F59E7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{226DCA7E-F5CF-475F-B2BA-B2952F59E7E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07D06440-3227-45E7-8675-78C2AFF28681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07D06440-3227-45E7-8675-78C2AFF28681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07D06440-3227-45E7-8675-78C2AFF28681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07D06440-3227-45E7-8675-78C2AFF28681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D88CAC-B3E4-4314-BB8C-BBA3EEC8B296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D88CAC-B3E4-4314-BB8C-BBA3EEC8B296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D88CAC-B3E4-4314-BB8C-BBA3EEC8B296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D88CAC-B3E4-4314-BB8C-BBA3EEC8B296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ECBC9C9-A02B-464D-9F4A-7A65B22FE8DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ECBC9C9-A02B-464D-9F4A-7A65B22FE8DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ECBC9C9-A02B-464D-9F4A-7A65B22FE8DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ECBC9C9-A02B-464D-9F4A-7A65B22FE8DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C3C7DB5-C352-4095-AF56-83F6AAB0DCF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C3C7DB5-C352-4095-AF56-83F6AAB0DCF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C3C7DB5-C352-4095-AF56-83F6AAB0DCF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C3C7DB5-C352-4095-AF56-83F6AAB0DCF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9B2218B-12E1-4503-9863-9A3872FF1866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9B2218B-12E1-4503-9863-9A3872FF1866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9B2218B-12E1-4503-9863-9A3872FF1866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9B2218B-12E1-4503-9863-9A3872FF1866}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5D3CF40A-234B-4F4F-B520-723A42CE8DE0}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{226DCA7E-F5CF-475F-B2BA-B2952F59E7E4} = {93C12687-E976-4557-9E43-5A5695E37802}
+		{62D88CAC-B3E4-4314-BB8C-BBA3EEC8B296} = {93C12687-E976-4557-9E43-5A5695E37802}
+		{07D06440-3227-45E7-8675-78C2AFF28681} = {93C12687-E976-4557-9E43-5A5695E37802}
+		{1ECBC9C9-A02B-464D-9F4A-7A65B22FE8DC} = {93C12687-E976-4557-9E43-5A5695E37802}
+		{3C3C7DB5-C352-4095-AF56-83F6AAB0DCF5} = {93C12687-E976-4557-9E43-5A5695E37802}
+		{D9B2218B-12E1-4503-9863-9A3872FF1866} = {93C12687-E976-4557-9E43-5A5695E37802}
 	EndGlobalSection
 EndGlobal
