@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <ShinyVersion>2.0.0-preview-0014</ShinyVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,7 +13,8 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(ShinyDebug)' == 'false'">
-        <PackageReference Include="Shiny.Extensions.Push" Version="2.0.0-preview-0014" />    
+        <PackageReference Include="Shiny.Extensions.Push" Version="$(ShinyVersion)" />
+        <PackageReference Include="Shiny.Extensions.Push.Endpoints" Version="$(ShinyVersion)" />
     </ItemGroup>
     
     <ItemGroup Condition="'$(ShinyDebug)' == 'true'">

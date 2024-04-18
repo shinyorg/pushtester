@@ -4,6 +4,7 @@ using Android.App;
 using PushTesting.Delegates;
 using PushTesting.Services;
 using PushTesting.Services.Impl;
+using Refit;
 using Shiny.Push;
 
 namespace PushTesting;
@@ -52,6 +53,11 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
         builder.Services.AddSingleton<AppSqliteConnection>();
+        builder.Services.AddSingleton(sp =>
+        {
+            var baseUri = sp.GetRequiredService<IConfiguration>()["NativeUri"] ?? "https://localhost";
+            return RestService.For<IApiClient>(baseUri);
+        });
 
         return builder;
     }
@@ -77,6 +83,10 @@ public static class MauiProgram
 
             case "firebase":
                 RegisterFirebase(builder);
+                break;
+            
+            case "native":
+                RegisterNative(builder);
                 break;
 
             default:
@@ -126,6 +136,25 @@ public static class MauiProgram
                 , DefaultChannel
 #endif
             )
+        );
+    }
+
+
+    static void RegisterNative(MauiAppBuilder builder)
+    {
+        builder.Services.AddSingleton<IPushSender, NativePushSender>();
+
+        builder.Services.AddPush<MyPushDelegate>(
+#if ANDROID
+            new FirebaseConfiguration(
+                false,
+                builder.Configuration["Firebase:AndroidAppId"],
+                builder.Configuration["Firebase:ProjectNumber"],
+                builder.Configuration["Firebase:ProjectId"],
+                builder.Configuration["Firebase:ApiKey"],
+                DefaultChannel
+            )
+#endif
         );
     }
 

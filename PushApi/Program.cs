@@ -13,8 +13,7 @@ builder.Services.AddPushManagement(x => x
         TeamId = appleCfg["TeamId"]!,
         Key = appleCfg["Key"]!,
         KeyId = appleCfg["KeyId"]!,
-        IsProduction = false
-        //JwtExpiryMinutes
+        IsProduction = appleCfg["Production"] == "true"
     })
     .AddGoogleFirebase(new GoogleConfiguration
     {
@@ -34,7 +33,7 @@ builder.Services.AddPushManagement(x => x
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
-// app.MapPushEndpoints("push", true, x => x.User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+app.MapPushEndpoints("push", false);
 
 app.RegisterEndpoints();
 app.Run();
