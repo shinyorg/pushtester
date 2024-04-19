@@ -5,7 +5,7 @@ namespace PushTesting.Services;
 
 public interface IApiClient
 {
-    [Post("/push/register")]
+    [Post("/push")]
     Task Register([Body] PushRegister pushToken);
 
     [Delete("/push/{platform}/{pushToken}")]

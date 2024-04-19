@@ -34,7 +34,7 @@ public class MyPushDelegate(
         await this.Message("New Push Token Received");
         if (configuration["PushProvider"] == "native")
         {
-            await apiClient.UnRegister(OS, token);
+            await apiClient.Register(new PushRegister(OS, token));
         }
     }
 

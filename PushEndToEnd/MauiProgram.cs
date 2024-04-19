@@ -146,7 +146,7 @@ public static class MauiProgram
 
         builder.Services.AddPush<MyPushDelegate>(
 #if ANDROID
-            new FirebaseConfiguration(
+            new FirebaseConfig(
                 false,
                 builder.Configuration["Firebase:AndroidAppId"],
                 builder.Configuration["Firebase:ProjectNumber"],
@@ -159,7 +159,7 @@ public static class MauiProgram
     }
 
 #if ANDROID
-    static NotificationChannel DefaultChannel => new NotificationChannel(
+    static NotificationChannel DefaultChannel => new(
         "default_channel",
         "Default Channel",
         NotificationImportance.Default

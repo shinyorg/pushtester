@@ -18,12 +18,11 @@
     </ItemGroup>
     
     <ItemGroup Condition="'$(ShinyDebug)' == 'true'">
-        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Abstractions\Shiny.Extensions.Push.Abstractions.csproj" />
-        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Apple\Shiny.Extensions.Push.Apple.csproj" />
+<!--        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Abstractions\Shiny.Extensions.Push.Abstractions.csproj" />-->
+<!--        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Apple\Shiny.Extensions.Push.Apple.csproj" />-->
         <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Endpoints\Shiny.Extensions.Push.Endpoints.csproj" />
-        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.GoogleFirebase\Shiny.Extensions.Push.GoogleFirebase.csproj" />
+<!--        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.GoogleFirebase\Shiny.Extensions.Push.GoogleFirebase.csproj" />-->
         <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push\Shiny.Extensions.Push.csproj" />
-        <ProjectReference Include="..\..\apiservices\src\Shiny.Extensions.Push.Abstractions\Shiny.Extensions.Push.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

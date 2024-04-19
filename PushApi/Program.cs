@@ -21,6 +21,7 @@ builder.Services.AddPushManagement(x => x
         SenderId = googleCfg["SenderId"]!,
         DefaultChannelId = googleCfg["DefaultChannelId"]!
     })
+    .UseFileRepository()
     // .UseAdoNetRepository<SqliteConnection>(new DbRepositoryConfig(
     //     "Data Source=shiny.db",
     //     "@",
