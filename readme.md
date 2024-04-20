@@ -26,3 +26,6 @@ to ensure you have setup everything properly from APP to Provider.
 ## FAQ
 > Q. Why can I note test pure Apple Push Notifications APNS with this
 > A. There is some special encryption requirements to pushing things to Apple, that I haven't found work on iOS
+
+
+## Native Testing Coming Soon
