@@ -7,8 +7,6 @@ namespace PushTesting.Delegates;
 
 public class MyPushDelegate(
     AppSqliteConnection conn, 
-    IApiClient apiClient,
-    IConfiguration configuration, 
     IDialogs dialogs
 ) : PushDelegate
 {
@@ -32,28 +30,14 @@ public class MyPushDelegate(
     {
         await this.Store(new[] { ("Token", token) });
         await this.Message("New Push Token Received");
-        if (configuration["PushProvider"] == "native")
-        {
-            await apiClient.Register(new PushRegister(OS, token));
-        }
     }
 
     public override async Task OnUnRegistered(string token)
     {
         await this.Store([("Token", token)]);
         await this.Message("UnRegistered from Push");
-        if (configuration["PushProvider"] == "native")
-        {
-            await apiClient.UnRegister(OS, token);
-        }
     }
-
-    const string OS =
-        #if IOS
-        "ios";
-        #else
-        "android";
-        #endif
+    
 
     Task Store((string Key, string Value)[] values, [CallerMemberName] string? eventName = null)
     {

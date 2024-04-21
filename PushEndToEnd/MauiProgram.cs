@@ -53,11 +53,6 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
         builder.Services.AddSingleton<AppSqliteConnection>();
-        builder.Services.AddSingleton(sp =>
-        {
-            var baseUri = sp.GetRequiredService<IConfiguration>()["NativeUri"] ?? "https://localhost";
-            return RestService.For<IApiClient>(baseUri);
-        });
 
         return builder;
     }
@@ -142,8 +137,14 @@ public static class MauiProgram
 
     static void RegisterNative(MauiAppBuilder builder)
     {
+        builder.Services.AddSingleton(sp =>
+        {
+            var baseUri = sp.GetRequiredService<IConfiguration>()["NativeUri"] ?? "https://localhost";
+            return RestService.For<IApiClient>(baseUri);
+        });        
         builder.Services.AddSingleton<IPushSender, NativePushSender>();
 
+        builder.Services.AddSingleton<IPushProvider, MyNativePushProvider>();
         builder.Services.AddPush<MyPushDelegate>(
 #if ANDROID
             new FirebaseConfig(
