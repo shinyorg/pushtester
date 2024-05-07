@@ -1,11 +1,15 @@
 ﻿using System.Runtime.CompilerServices;
 using PushTesting.Services;
 using Shiny.Push;
+#if APPLE
+using UIKit;
+using UserNotifications;
+#endif
 
 namespace PushTesting.Delegates;
 
 
-public class MyPushDelegate(
+public partial class MyPushDelegate(
     AppSqliteConnection conn, 
     IDialogs dialogs
 ) : PushDelegate
@@ -67,3 +71,15 @@ public class MyPushDelegate(
         }
     }
 }
+
+#if APPLE
+public partial class MyPushDelegate : IApplePushDelegate
+{
+    // return null for default value
+    public UNNotificationPresentationOptions? GetPresentationOptions(PushNotification notification)
+        // show notification when UI is up
+        => UNNotificationPresentationOptions.Banner | UNNotificationPresentationOptions.Sound; 
+
+    public UIBackgroundFetchResult? GetFetchResult(PushNotification notification) => null;
+}
+#endif
