@@ -10,13 +10,14 @@ public class AzureNotificationHubPushSender : IPushSender
 {
     readonly NotificationHubClient client;
     readonly IPushManager pushManager;
+    readonly ILogger logger;
     readonly JsonSerializerOptions serializerOptions = new()
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
     };
     
 
-    public AzureNotificationHubPushSender(IConfiguration configuration)
+    public AzureNotificationHubPushSender(IPushManager pushManager, IConfiguration configuration, ILogger<AzureNotificationHubPushSender> logger)
     {
         this.pushManager = pushManager;
         this.client = NotificationHubClient.CreateClientFromConnectionString(
@@ -24,6 +25,7 @@ public class AzureNotificationHubPushSender : IPushSender
             configuration["AzureNotificationHubs:HubName"],
             true
         );
+        this.logger = logger;
     }
 
 
@@ -46,6 +48,7 @@ public class AzureNotificationHubPushSender : IPushSender
         }
 
         var json = JsonSerializer.Serialize(push, this.serializerOptions);
+        this.logger.LogDebug("PUSH JSON: " + json);
         var outcome = await this.client.SendFcmV1NativeNotificationAsync(json, new[] { token });
 #else
         var push = new ApplePush { DataTest = "Testing data" };
@@ -54,6 +57,7 @@ public class AzureNotificationHubPushSender : IPushSender
             push.Aps.Alert = "Test Message";
         
         var json = JsonSerializer.Serialize(push, this.serializerOptions);
+        this.logger.LogDebug("PUSH JSON: " + json);
         var outcome = await this.client.SendAppleNativeNotificationAsync(json, new[] { token });
 #endif 
 
